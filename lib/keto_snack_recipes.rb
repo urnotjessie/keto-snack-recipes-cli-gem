@@ -1,4 +1,4 @@
-require "keto_snack_recipes/version"
+require_relative "../config/environment"
 
 module KetoSnackRecipes
   # Your code goes here...

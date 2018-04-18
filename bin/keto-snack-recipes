@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require_relative '../lib/keto_snack_recipes'
+
+KetoSnackRecipes::CLI.new.call
