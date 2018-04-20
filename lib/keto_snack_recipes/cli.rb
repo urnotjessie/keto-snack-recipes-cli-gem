@@ -1,20 +1,21 @@
 class KetoSnackRecipes::CLI
 
   def call
+    KetoSnackRecipes::Scraper.new.scrape_and_create_recipes
     puts "It's time to explore Keto recipes for your favorite snacks!"
     list_recipes
-    menu
+    show_recipe
     goodbye
   end
 
   def list_recipes
-    @recipes = KetoSnackRecipes::Recipes.list_all
+    @recipes = KetoSnackRecipes::Recipes.all
     @recipes.each.with_index(1) do |recipe, index|
-      puts "#{index}. #{recipe.name} - #{recipe.carbs} - #{recipe.fat} - #{recipe.protein} - #{recipe.calories}"
+      puts "#{index}. #{recipe.name} - #{recipe.url}"
     end
   end
 
-  def menu
+  def show_recipe
     input = nil
     while input != "exit"
       puts "Which recipes would you like more information on?"

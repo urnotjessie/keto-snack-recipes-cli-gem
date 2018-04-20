@@ -1,24 +1,25 @@
 class KetoSnackRecipes::Recipes
 
-  attr_accessor :name, :carbs, :fat, :protein, :calories
+  attr_accessor :name, :carbs, :fat, :protein, :calories, :description, :ingredients, :nutritional_info, :url, :instruction_url
 
-  def self.list_all
+  @@all = []
 
-    recipe_1 = self.new
-    recipe_1.name = "Bacon Guacamole Balls"
-    recipe_1.carbs = "1.4"
-    recipe_1.fat = "15.2"
-    recipe_1.protein = "3.4"
-    recipe_1.calories = "156.0"
+  def initialize(name, url)
+    @name = name
+    @url = url
 
-    recipe_2 = self.new
-    recipe_2.name = "Zucchini Poppers"
-    recipe_2.carbs = "1.4"
-    recipe_2.fat = "15.2"
-    recipe_2.protein = "3.4"
-    recipe_2.calories = "156.0"
+    @@all << self
+  end
 
-    [recipe_1, recipe_2]
+  def self.new_from_index_page(recipe)
+    self.new(
+      recipe.css(".card-header a").attribute("title").value,
+      recipe.css(".card-header a").attribute("href").value
+    )
+  end
+
+  def self.all
+    @@all
   end
 
 end
