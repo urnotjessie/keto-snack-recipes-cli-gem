@@ -3,11 +3,19 @@ require 'Nokogiri'
 
 class KetoSnackRecipes::Scraper
 
-  def scrape_and_create_recipes
-    html = Nokogiri::HTML(open("https://ketodash.com/recipe?type=Snack"))
+  def scrape_index_page(index_url)
+    html = Nokogiri::HTML(open(index_url))
+    get_recipes = html.css(".col-sm-6 .card")
 
-    html.css(".col-sm-6 .card").each do |recipe|
+    get_recipes.each_with_index do |recipe|
       KetoSnackRecipes::Recipes.new_from_index_page(recipe)
     end
+
   end
+
+  def scrape_recipe_page(recipe_url)
+    html = Nokogiri::HTML(open(recipe_url))
+    KetoSnackRecipes::Recipes.new_from_recipe_url(html, recipe_url)
+  end
+
 end
