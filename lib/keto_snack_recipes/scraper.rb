@@ -12,10 +12,10 @@ class KetoSnackRecipes::Scraper
     end
 
   end
-
-  def scrape_recipe_page(recipe_url, index)
-    html = Nokogiri::HTML(open(recipe_url))
-    KetoSnackRecipes::Recipes.new_from_recipe_url(html, index)
-  end
+  # 
+  # def scrape_recipe_page(recipe_url, index)
+  #   html = Nokogiri::HTML(open(recipe_url))
+  #   KetoSnackRecipes::Recipes.new_from_recipe_url(html, index)
+  # end
 
 end

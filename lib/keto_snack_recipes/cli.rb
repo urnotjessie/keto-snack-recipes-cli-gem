@@ -28,8 +28,8 @@ class KetoSnackRecipes::CLI
       puts "Enter exit to exit the program."
       input = gets.strip.downcase
       if input.to_i > 0
-        recipe_url = @recipes[input.to_i - 1].url
-        recipe = KetoSnackRecipes::Scraper.new.scrape_recipe_page(recipe_url, input.to_i - 1)
+        recipe_url = @recipes[input.to_i - 1].recipe_url
+        recipe = KetoSnackRecipes::Recipes.find_recipe(input.to_i - 1)
         puts "#{recipe.name} - #{recipe.description} - #{recipe.ingredients}"
       elsif input == "list"
         self.list_recipes
