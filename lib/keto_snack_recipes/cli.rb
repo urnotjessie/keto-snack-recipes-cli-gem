@@ -2,10 +2,10 @@ require 'pry'
 
 class KetoSnackRecipes::CLI
 
-  @index_url = "https://ketodash.com/recipe?type=Snack"
+  @@index_url = "https://ketodash.com/recipe?type=Snack"
 
   def call
-    KetoSnackRecipes::Scraper.new.scrape_index_page("https://ketodash.com/recipe?type=Snack")
+    KetoSnackRecipes::Scraper.new.scrape_index_page(@@index_url)
     puts "It's time to explore Keto recipes for your favorite snacks!"
     list_recipes
     show_recipe
@@ -13,9 +13,19 @@ class KetoSnackRecipes::CLI
   end
 
   def list_recipes
-    @recipes = KetoSnackRecipes::Recipes.all
-    @recipes.each.with_index(1) do |recipe, index|
-      puts "#{index}. #{recipe.name}"
+    puts ""
+    puts "What number recipes would you like to see? 1-10, 11-20, 21-30, 31-40 or 41-49?"
+    input_number = gets.strip.to_i
+    if input_number != 41
+      @recipes = KetoSnackRecipes::Recipes.all[input_number - 1, 10]
+      @recipes.each do |recipe|
+        puts "#{recipe.id}. #{recipe.name}"
+      end
+    elsif input_number == 41
+      @recipes = KetoSnackRecipes::Recipes.all[input_number - 1, 9]
+      @recipes.each do |recipe|
+        puts "#{recipe.id}. #{recipe.name}"
+      end
     end
   end
 
@@ -28,7 +38,6 @@ class KetoSnackRecipes::CLI
       puts "Enter exit to exit the program."
       input = gets.strip.downcase
       if input.to_i > 0
-        recipe_url = @recipes[input.to_i - 1].recipe_url
         recipe = KetoSnackRecipes::Recipes.find_recipe(input.to_i - 1)
         puts "#{recipe.name} - #{recipe.description} - #{recipe.ingredients}"
       elsif input == "list"
