@@ -1,7 +1,3 @@
-require 'pry'
-require 'open-uri'
-require 'Nokogiri'
-
 class KetoSnackRecipes::Recipes
 
   attr_accessor :name, :id, :carbs, :fat, :protein, :calories, :description, :ingredients, :nutritional_info, :recipe_url, :recipe_html, :external_link

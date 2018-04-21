@@ -1,5 +1,3 @@
-require 'pry'
-
 class KetoSnackRecipes::CLI
 
   @@index_url = "https://ketodash.com/recipe?type=Snack"
@@ -15,12 +13,14 @@ class KetoSnackRecipes::CLI
   def list_recipes
     puts ""
     puts "What number recipes would you like to see? 1-10, 11-20, 21-30, 31-40 or 41-49?"
+    puts ""
     input_number = gets.strip.to_i
     if input_number != 41
       @recipes = KetoSnackRecipes::Recipes.all[input_number - 1, 10]
-      @recipes.each do |recipe|
-        puts "#{recipe.id}. #{recipe.name}"
-      end
+      tp @recipes, :id, :name
+      # @recipes.each do |recipe|
+      #   puts "#{recipe.id}. #{recipe.name}"
+      # end
     elsif input_number == 41
       @recipes = KetoSnackRecipes::Recipes.all[input_number - 1, 9]
       @recipes.each do |recipe|
