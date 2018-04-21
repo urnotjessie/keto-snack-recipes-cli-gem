@@ -1,3 +1,5 @@
+require 'pry'
+
 class KetoSnackRecipes::CLI
 
   @index_url = "https://ketodash.com/recipe?type=Snack"
