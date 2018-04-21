@@ -24,11 +24,8 @@ class KetoSnackRecipes::Recipes
     @@all
   end
 
-  def self.new_from_recipe_url(html, recipe_url)
-    recipe = self.new(
-      html.css("h1").text,
-      recipe_url
-    )
+  def self.new_from_recipe_url(html, index)
+    recipe = @@all[index]
     recipe.description = html.css(".col-12 .d-print-none")[1].text.gsub(".\n", "")
     recipe.link = html.css(".col-12 a")[1].attribute("href").value
     recipe.ingredients = html.css(".col-12 ul")[0].css("li").text
