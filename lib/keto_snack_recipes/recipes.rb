@@ -4,10 +4,15 @@ class KetoSnackRecipes::Recipes
 
   @@all = []
 
-  def initialize(name, recipe_url, id)
+  def initialize(name, recipe_url, id, carbs, protein, fat, calories)
     @name = name
     @recipe_url = recipe_url
     @id = id
+    @carbs = carbs
+    @protein = protein
+    @fat = fat
+    @calories = calories
+
     @@all << self
   end
 
@@ -15,8 +20,12 @@ class KetoSnackRecipes::Recipes
     self.new(
       recipe.css(".card-header a").attribute("title").value,
       "https://ketodash.com#{recipe.css(".card-header a").attribute("href").value}",
-      index + 1
-    )
+      index + 1,
+      recipe.css(".card-block ul").css("li")[3].text.split(": ")[1],
+      recipe.css(".card-block ul").css("li")[1].text.split(": ")[1],
+      recipe.css(".card-block ul").css("li")[2].text.split(": ")[1],
+      recipe.css(".card-block ul").css("li")[0].text.split(": ")[1]
+      )
   end
 
   def self.all

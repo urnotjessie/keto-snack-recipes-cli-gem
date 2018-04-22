@@ -17,7 +17,7 @@ class KetoSnackRecipes::CLI
     input_number = gets.strip.to_i
     if input_number != 41
       @recipes = KetoSnackRecipes::Recipes.all[input_number - 1, 10]
-      tp @recipes, :id, :name
+      tp @recipes, :id, :name, :carbs, :protein, :fat, :calories
       # @recipes.each do |recipe|
       #   puts "#{recipe.id}. #{recipe.name}"
       # end
