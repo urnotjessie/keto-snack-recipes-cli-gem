@@ -49,7 +49,7 @@ class KetoSnackRecipes::Recipes
   end
 
   def ingredients
-    @ingredients ||= self.recipe_html.css(".col-12 ul")[0].css("li").text
+    @ingredients ||= self.recipe_html.css(".col-12 ul")[0].css("li")
   end
 
 

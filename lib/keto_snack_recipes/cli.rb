@@ -5,7 +5,7 @@ class KetoSnackRecipes::CLI
   def call
     KetoSnackRecipes::Scraper.new.scrape_index_page(@@index_url)
     puts ""
-    puts "******** It's time to explore Keto recipes for your favorite snacks! ********"
+    puts "======== It's time to explore Keto recipes for your favorite snacks! ========"
     list_recipes
     show_recipe
     goodbye
@@ -49,7 +49,14 @@ class KetoSnackRecipes::CLI
       input = gets.strip.downcase
       if input.to_i > 0
         recipe = KetoSnackRecipes::Recipes.find_recipe(input.to_i - 1)
-        puts "#{recipe.name} - #{recipe.description} - #{recipe.ingredients}"
+        puts "------------------------------  #{recipe.name}  ------------------------------"
+        puts ""
+        puts "#{recipe.description}"
+        puts ""
+        puts "-------------------------------  Ingredients  -------------------------------"
+        puts ""
+        recipe.ingredients.each{|ingredient| puts "•  #{ingredient.text}"}
+        puts ""
       elsif input == "list"
         self.list_recipes
       end
