@@ -34,7 +34,9 @@ class KetoSnackRecipes::CLI
         break
 
       else
-        puts "Please choose from 1-10, 11-20, 21-30, 31-40, 41-49."
+        puts ""
+        puts "Please choose from 1-10, 11-20, 21-30, 31-40, 41-49 or enter exit to exit the program.".green.bold
+        puts ""
         input = gets.strip
       end
     end
@@ -47,7 +49,7 @@ class KetoSnackRecipes::CLI
       puts "Which recipes would you like more information on?".green.bold
       puts ""
       puts "-- Enter a recipe number to view recipe details.".green
-      puts "-- Enter list to see all recipes again.".green
+      puts "-- Enter list to select another list.".green
       puts "-- Enter exit to exit the program.".green
       puts ""
       input = gets.strip.downcase
@@ -70,9 +72,10 @@ class KetoSnackRecipes::CLI
         end
       elsif input == "list"
         self.list_recipes
+      elsif input == "exit"
+        goodbye
       end
     end
-    goodbye
   end
 
   def goodbye
