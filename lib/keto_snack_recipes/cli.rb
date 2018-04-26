@@ -42,6 +42,7 @@ class KetoSnackRecipes::CLI
     end
   end
 
+
   def show_recipe
     input = nil
     while input != "exit"
@@ -72,6 +73,7 @@ class KetoSnackRecipes::CLI
         end
       elsif input == "list"
         self.list_recipes
+        break
       elsif input == "exit"
         goodbye
         break
