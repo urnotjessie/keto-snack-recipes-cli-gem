@@ -74,6 +74,7 @@ class KetoSnackRecipes::CLI
         self.list_recipes
       elsif input == "exit"
         goodbye
+        break
       end
     end
   end
