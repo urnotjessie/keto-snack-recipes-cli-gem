@@ -15,15 +15,13 @@ class KetoSnackRecipes::CLI
     puts ""
     input = gets.strip
     while input.to_i != nil
-      if input.to_i.between?(1,31)
-        @recipes = KetoSnackRecipes::Recipes.all[input.to_i - 1, 10]
-        puts ""
-        tp @recipes, :id, :name, :carbs, :protein, :fat, :calories
-        show_recipe
-        break
-
-      elsif input.to_i == 41
-        @recipes = KetoSnackRecipes::Recipes.all[input.to_i - 1, 9]
+      if input.to_i.between?(1,41)
+        if input.to_i.between?(1,31)
+          range = 10
+        else
+          range = 9
+        end
+        @recipes = KetoSnackRecipes::Recipes.all[input.to_i - 1, range]
         puts ""
         tp @recipes, :id, :name, :carbs, :protein, :fat, :calories
         show_recipe
