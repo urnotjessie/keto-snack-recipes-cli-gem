@@ -52,8 +52,9 @@ class KetoSnackRecipes::CLI
       puts "-- Enter exit to exit the program.".green
       puts ""
       input = gets.strip.downcase
-      if input.to_i > 0
-        recipe = KetoSnackRecipes::Recipes.find_recipe(input.to_i - 1)
+      if input.to_i <= KetoSnackRecipes::Recipes.all.size && input.to_i > 0
+        #recipe = KetoSnackRecipes::Recipes.find_recipe(input.to_i - 1)
+        recipe = KetoSnackRecipes::Recipes.all[input.to_i - 1]
         puts ""
         puts "------------------------------  #{recipe.name}  ------------------------------".black.on_white
         puts ""
@@ -84,5 +85,17 @@ class KetoSnackRecipes::CLI
     puts "- Goodbye -".green.bold
     puts ""
   end
+
+  # User selects number for recipe
+  # Use that input to find the recipe (will have to build a class method in Recipe like self.find_by_[whatever])
+  # or it's just recipe = Recipe.all[input-1]
+  # recipe.[attr]
+  # from the scraper class:
+  # recipe.update(recipe_attributes)
+  # Recipe class:
+  # def update(attr_hash)
+  #   self.description = attr_hash[:description]
+  # end
+
 
 end
