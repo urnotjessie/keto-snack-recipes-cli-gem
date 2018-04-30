@@ -76,6 +76,10 @@ class KetoSnackRecipes::CLI
       elsif input == "exit"
         goodbye
         break
+      else
+        puts ""
+        puts "Invalid input, please select from listed recipe numbers.".green.bold
+        puts ""
       end
     end
   end
@@ -85,17 +89,4 @@ class KetoSnackRecipes::CLI
     puts "- Goodbye -".green.bold
     puts ""
   end
-
-  # User selects number for recipe
-  # Use that input to find the recipe (will have to build a class method in Recipe like self.find_by_[whatever])
-  # or it's just recipe = Recipe.all[input-1]
-  # recipe.[attr]
-  # from the scraper class:
-  # recipe.update(recipe_attributes)
-  # Recipe class:
-  # def update(attr_hash)
-  #   self.description = attr_hash[:description]
-  # end
-
-
 end
