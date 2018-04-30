@@ -11,7 +11,7 @@ class KetoSnackRecipes::CLI
 
   def list_recipes
     puts ""
-    puts "What number recipes would you like to see? 1-10, 11-20, 21-30, 31-40 or 41-49?".green.bold
+    puts "What number recipes would you like to see? 1-10, 11-20, 21-30, 31-40 or 41-#{KetoSnackRecipes::Recipes.all.size}?".green.bold
     puts ""
     input = gets.strip
     while input.to_i != nil
@@ -19,7 +19,7 @@ class KetoSnackRecipes::CLI
         if input.to_i.between?(1,31)
           range = 10
         else
-          range = 9
+          range = KetoSnackRecipes::Recipes.all.size - 40
         end
         recipes = KetoSnackRecipes::Recipes.all[input.to_i - 1, range]
         puts ""
