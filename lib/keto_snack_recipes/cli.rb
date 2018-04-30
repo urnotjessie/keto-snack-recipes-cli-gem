@@ -21,9 +21,9 @@ class KetoSnackRecipes::CLI
         else
           range = 9
         end
-        @recipes = KetoSnackRecipes::Recipes.all[input.to_i - 1, range]
+        recipes = KetoSnackRecipes::Recipes.all[input.to_i - 1, range]
         puts ""
-        tp @recipes, :id, :name, :carbs, :protein, :fat, :calories
+        tp recipes, :id, :name, :carbs, :protein, :fat, :calories
         show_recipe
         break
 
@@ -52,9 +52,9 @@ class KetoSnackRecipes::CLI
       puts "-- Enter exit to exit the program.".green
       puts ""
       input = gets.strip.downcase
-      if input.to_i <= KetoSnackRecipes::Recipes.all.size && input.to_i > 0
-        #recipe = KetoSnackRecipes::Recipes.find_recipe(input.to_i - 1)
+      if input.to_i > 0 && input.to_i <= KetoSnackRecipes::Recipes.all.size
         recipe = KetoSnackRecipes::Recipes.all[input.to_i - 1]
+        KetoSnackRecipes::Scraper.new.scrape_recipe_page(recipe)
         puts ""
         puts "------------------------------  #{recipe.name}  ------------------------------".black.on_white
         puts ""

@@ -14,8 +14,18 @@ class KetoSnackRecipes::Scraper
         fat: recipe.css(".card-block ul").css("li")[2].text.split(": ")[1],
         calories: recipe.css(".card-block ul").css("li")[0].text.split(": ")[1]
       }
-      KetoSnackRecipes::Recipes.new.new_from_index_page(attr_hash)
+      KetoSnackRecipes::Recipes.new.set_attrs(attr_hash)
     end
+  end
+
+  def scrape_recipe_page(recipe)
+    recipe_html = Nokogiri::HTML(open(recipe.recipe_url))
+    update_attr_hash = {
+      description: recipe_html.css(".col-12 .d-print-none")[1].text.gsub(".\n", ""),
+      external_link: recipe_html.css(".col-12 a")[1].attribute("href").value,
+      ingredients: recipe_html.css(".col-12 ul")[0].css("li")
+    }
+    KetoSnackRecipes::Recipes.update(recipe, update_attr_hash)
   end
 
 end
